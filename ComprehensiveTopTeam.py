@@ -343,5 +343,3 @@ def getTopSchool(schoolid, fileName = "RelevantTeamTimes", XCtop2miles = 5, XCto
         writer.writerow("")
 
     file.close
-
-getTopSchool("1023")
