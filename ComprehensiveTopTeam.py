@@ -84,6 +84,13 @@ def getTopSchool(schoolid, fileName = "RelevantTeamTimes", XCtop2miles = 5, XCto
             templist.append(x)
 
     importantAtheleteList = templist
+    
+    templist = []
+    for x in importantAtheleteList:
+        if "meet" not in x:
+            templist.append(x)
+
+    importantAtheleteList = templist
 
     file_name = fileName + ".csv"
     file = open(file_name, "w", newline="")
@@ -160,7 +167,8 @@ def getTopSchool(schoolid, fileName = "RelevantTeamTimes", XCtop2miles = 5, XCto
                 timesList.append(item)
         timesList.sort()
 
-        athleteStats = [athlete_name.strip(), link, actualgrade, XCtwomiletime, XCthreemiletime, eighttime, convertedeight, sixtime, thirtytime, convertedthirty, timesList[0]]
+        timesList.append("")
+        athleteStats = [athlete_name.strip(), link, actualgrade, XCtwomiletime, XCthreemiletime, eighttime, convertedeight, sixtime, thirtytime, convertedthirty, timesList[0]] 
         writer.writerow(athleteStats)
         writer.writerow("")
         writer.writerow(["Name of meet", "Season", "Year", "Date", "Race Distance", "Time", "XC/Track", "Grade"])
@@ -343,5 +351,3 @@ def getTopSchool(schoolid, fileName = "RelevantTeamTimes", XCtop2miles = 5, XCto
         writer.writerow("")
 
     file.close
-
-getTopSchool("1023")
