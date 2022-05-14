@@ -93,7 +93,7 @@ def getTopSchool(schoolid, fileName = "RelevantTeamTimes", XCtop2miles = 5, XCto
     importantAtheleteList = templist
 
     file_name = fileName + ".csv"
-    file = open(file_name, "w", newline="")
+    file = open(file_name, "a", newline="")
     writer = csv.writer(file)
 
     for link in importantAtheleteList:
@@ -168,7 +168,7 @@ def getTopSchool(schoolid, fileName = "RelevantTeamTimes", XCtop2miles = 5, XCto
         timesList.sort()
 
         timesList.append("")
-        athleteStats = [athlete_name.strip(), link, actualgrade, XCtwomiletime, XCthreemiletime, eighttime, convertedeight, sixtime, thirtytime, convertedthirty, timesList[0]] 
+        athleteStats = [athlete_name.strip(), link, actualgrade, XCtwomiletime, XCthreemiletime, eighttime, convertedeight, sixtime, thirtytime, convertedthirty, timesList[0], schoolid] 
         writer.writerow(athleteStats)
         writer.writerow("")
         writer.writerow(["Name of meet", "Season", "Year", "Date", "Race Distance", "Time", "XC/Track", "Grade"])
@@ -231,7 +231,7 @@ def getTopSchool(schoolid, fileName = "RelevantTeamTimes", XCtop2miles = 5, XCto
                                     meet1 = meet.split('<')[0]
                                     date = splitList[-9]
                                     date1 = date.split('<')[0]
-                                    writer.writerow([meet1, season, year, date1, "800 Meters", realTime2, "Track", grade])
+                                    writer.writerow([meet1, season, year, date1, "800", realTime2, "Track", grade])
 
                         elif item == "1600 Meters":
                             eventlistindex =-1
@@ -248,7 +248,7 @@ def getTopSchool(schoolid, fileName = "RelevantTeamTimes", XCtop2miles = 5, XCto
                                     meet1 = meet.split('<')[0]
                                     date = splitList[-9]
                                     date1 = date.split('<')[0]
-                                    writer.writerow([meet1, season, year, date1, "1600 Meters", realTime2, "Track", grade])
+                                    writer.writerow([meet1, season, year, date1, "1600", realTime2, "Track", grade])
                         elif item == "3200 Meters":
                             eventlistindex =-1
                             for eventTimes in seasontable.find_all('table', {'class' : 'table table-sm table-responsive table-hover'}):
@@ -264,7 +264,7 @@ def getTopSchool(schoolid, fileName = "RelevantTeamTimes", XCtop2miles = 5, XCto
                                     meet1 = meet.split('<')[0]
                                     date = splitList[-9]
                                     date1 = date.split('<')[0]
-                                    writer.writerow([meet1, season, year, date1, "3200 Meters", realTime2, "Track", grade])
+                                    writer.writerow([meet1, season, year, date1, "3200", realTime2, "Track", grade])
                         timelistindex +=1
         except:
             print(athlete_name.strip() + " did not run track.")
@@ -325,7 +325,7 @@ def getTopSchool(schoolid, fileName = "RelevantTeamTimes", XCtop2miles = 5, XCto
                                     meet1 = meet.split('<')[0]
                                     date = splitList[-7]
                                     date1 = date.split('<')[0]
-                                    writer.writerow([meet1, season, year, date1, "2 Miles", realTime2, "XC", grade])
+                                    writer.writerow([meet1, season, year, date1, "2", realTime2, "XC", grade])
 
                         elif item == "3 Miles":
                             eventlistindex =-1
@@ -342,7 +342,7 @@ def getTopSchool(schoolid, fileName = "RelevantTeamTimes", XCtop2miles = 5, XCto
                                     meet1 = meet.split('<')[0]
                                     date = splitList[-7]
                                     date1 = date.split('<')[0]
-                                    writer.writerow([meet1, season, year, date1, "3 Miles", realTime2, "XC", grade])
+                                    writer.writerow([meet1, season, year, date1, "3", realTime2, "XC", grade])
                         
                         timelistindex +=1
         except:
@@ -351,3 +351,10 @@ def getTopSchool(schoolid, fileName = "RelevantTeamTimes", XCtop2miles = 5, XCto
         writer.writerow("")
 
     file.close
+    
+def restart_csv():
+    with open("RelevantTeamTimes.csv", "w") as csv_file:
+        csv_writer = csv.writer(csv_file)
+        csv_writer.writerow("")
+    
+    
